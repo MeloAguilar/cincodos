@@ -22,6 +22,18 @@ public class AlumnoEntity implements Serializable {
     @Column(name = "apellidos")
     private String apellidos;
 
+    public List<MatriculaEntity> getMatriculas() {
+        return matriculas;
+    }
+
+    public void setMatriculas(List<MatriculaEntity> matriculas) {
+        this.matriculas = matriculas;
+    }
+
+    public void setFechaNacimiento(String fechaNacimiento) {
+        this.fechaNacimiento = fechaNacimiento;
+    }
+
     @Column(name = "fechaNacimiento")
     private String fechaNacimiento;
 
@@ -31,6 +43,10 @@ public class AlumnoEntity implements Serializable {
         this.nombre = nombre;
         this.apellidos = apellidos;
         this.fechaNacimiento = fechaNacimiento;
+    }
+
+    public AlumnoEntity(int id){
+        this.id = id;
     }
 
     public AlumnoEntity() {

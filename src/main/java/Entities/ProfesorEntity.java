@@ -19,15 +19,54 @@ public class ProfesorEntity implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-
     //Atributos
     private int id;
 
 
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "idProfesor")
-    List<MatriculaEntity> matriculas;
+    private List<MatriculaEntity> matriculas;
 
+
+    public List<MatriculaEntity> getMatriculas() {
+        return matriculas;
+    }
+
+    public void setMatriculas(List<MatriculaEntity> matriculas) {
+        this.matriculas = matriculas;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public String getApellidos() {
+        return apellidos;
+    }
+
+    public void setApellidos(String apellidos) {
+        this.apellidos = apellidos;
+    }
+
+    public String getFechaNacimiento() {
+        return fechaNacimiento;
+    }
+
+    public void setFechaNacimiento(String fechaNacimiento) {
+        this.fechaNacimiento = fechaNacimiento;
+    }
+
+    public int getAntiguedad() {
+        return antiguedad;
+    }
+
+    public void setAntiguedad(int antiguedad) {
+        this.antiguedad = antiguedad;
+    }
 
     @Column(name = "nombre")
     private String nombre;
@@ -66,6 +105,9 @@ public class ProfesorEntity implements Serializable {
         this.antiguedad = 0;
     }
 
+    public ProfesorEntity(int id){
+        this.id = id;
+    }
     //End Constructores
 
 

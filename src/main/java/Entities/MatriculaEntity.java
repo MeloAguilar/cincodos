@@ -15,13 +15,51 @@ public class MatriculaEntity implements Serializable {
 
 
 
-    @Column(name = "profesor_id")
-    @JoinColumn(name = "idProfesor")
-    private ProfesorEntity idProfesor;
 
-    @Column(name = "alumno_id")
-    @JoinColumn(name="FK_AlumnoId")
-    private int idAlumno;
+    @ManyToOne
+    @JoinColumn(name = "idProfesor")
+   private ProfesorEntity profesor;
+
+    public ProfesorEntity getProfesor() {
+        return profesor;
+    }
+
+    public void setProfesor(ProfesorEntity profesor) {
+        this.profesor = profesor;
+    }
+
+    public AlumnoEntity getAlumno() {
+        return alumno;
+    }
+
+    public void setAlumno(AlumnoEntity alumno) {
+        this.alumno = alumno;
+    }
+
+    @ManyToOne
+    @JoinColumn(name = "idAlumno")
+   private AlumnoEntity alumno;
+
+
+
+
+    public String getAsignatura() {
+        return asignatura;
+    }
+
+    public void setAsignatura(String asignatura) {
+        this.asignatura = asignatura;
+    }
+
+    public int getCurso() {
+        return curso;
+    }
+
+    public void setCurso(int curso) {
+        this.curso = curso;
+    }
+
+
 
     @Column(name = "asignatura")
     private String asignatura;
@@ -32,23 +70,23 @@ public class MatriculaEntity implements Serializable {
 
     public MatriculaEntity(int id, int idProfesor, int idAlumno, String asignatura, int curso) {
         this.id = id;
-        this.idProfesor = idProfesor;
-        this.idAlumno = idAlumno;
+        this.profesor = new ProfesorEntity(idProfesor) ;
+        this.alumno = new AlumnoEntity(idAlumno);
         this.asignatura = asignatura;
         this.curso = curso;
     }
 
     public MatriculaEntity( int idProfesor, int idAlumno, String asignatura, int curso) {
-        this.idProfesor = idProfesor;
-        this.idAlumno = idAlumno;
+        this.profesor = new ProfesorEntity(idProfesor) ;
+        this.alumno = new AlumnoEntity(idAlumno);
         this.asignatura = asignatura;
         this.curso = curso;
     }
 
     public MatriculaEntity() {
         this.id = 0;
-        this.idProfesor = 0;
-        this.idAlumno = 0;
+        this.profesor = new ProfesorEntity(0) ;
+        this.alumno = new AlumnoEntity(0);
         this.asignatura = "asignatura";
         this.curso = 0;
     }
@@ -66,7 +104,7 @@ public class MatriculaEntity implements Serializable {
                 asignatura = %s
                 
                 curso = %d
-                ========================================""", id, idProfesor, idAlumno, asignatura, curso);
+                ========================================""", id, "%s %s".formatted(profesor.getNombre(), profesor.getApellidos()),"%s %s".formatted(alumno.getNombre(), alumno.getApellidos()), asignatura, curso);
 
     }
 
