@@ -13,20 +13,20 @@ public class MainMenu {
 
     static Scanner sc = new Scanner(System.in);
 
-    public static final String submenu = """
+    public static final String SUBMENU = """
             1 - Crear
             2 - Modificar
             3 - Eliminar
             0 - Salir
             """;
-    public static final String menu = """
+    public static final String MENU = """
             1 - Cosas con Profesores
             2 - Cosas con alumnos
             3 - Cosas con Matrículas
             0 - Salir
             """;
 
-    public static final String submenumatriculas = """
+    public static final String SUBMENUMATRICULAS = """
             1 - Crear
             2 - Modificar
             3 - Eliminar
@@ -35,10 +35,17 @@ public class MainMenu {
             0 - Salir
             """;
 
+
+    /**
+     * Método que se encarga de convertir un objeto String a entero si es posible,
+     * si no lo es devuelve -1
+     *
+     * pre: toParse debe ser distinto de -1, ya que esta es la salida de error
+     * @param toParse
+     * @return un entero válido o -1
+     */
     private static int StringToInt(String toParse) {
-
         int number;
-
         try {
             number = Integer.parseInt(toParse);
         } catch (Exception e) {
@@ -49,13 +56,16 @@ public class MainMenu {
 
 
     /**
+     *
+     * Menu principal de la aplicacion
+     *
      * @param sc
      */
     public static void menuPrincipal() {
 
         boolean salir = false;
         while (!salir) {
-            System.out.println(menu);
+            System.out.println(MENU);
             String opcion = sc.next();
             int eleccion = StringToInt(opcion);
             switch (eleccion) {
@@ -81,13 +91,16 @@ public class MainMenu {
 
 
     /**
+     *
+     * Menu que muestra al usuario las opciones de insercion, edicion y eliminacion de profesores
+     *
      * @param sc
      */
     public static void accionesProfesores() {
 
         boolean salir = false;
         while (!salir) {
-            System.out.println(submenu);
+            System.out.println(SUBMENU);
             String opcion = sc.next();
             int eleccion = StringToInt(opcion);
             switch (eleccion) {
@@ -158,7 +171,10 @@ public class MainMenu {
 
 
     /**
-     * @param sc
+     *
+     * Método que se encarga de realizar las llamadas necesarias a la clase de acceso a datos
+     * para insertar un Profesor en la base de datos
+     *
      */
     private static void insertarProfesor() {
         DAO dao = new DAO();
@@ -200,12 +216,14 @@ public class MainMenu {
 
     /**
      *
+     * Menu que muestra al usuario las opciones de insercion, edicion y eliminacion de Alumnos
+     *
      */
     public static void accionesAlumnos() {
 
         boolean salir = false;
         while (!salir) {
-            System.out.println(submenu);
+            System.out.println(SUBMENU);
             String opcion = sc.next();
             int eleccion = StringToInt(opcion);
             switch (eleccion) {
@@ -231,6 +249,10 @@ public class MainMenu {
     }
 
 
+    /**
+     *
+     * @return
+     */
     private static AlumnoEntity getAlumnoData() {
         AlumnoEntity alumno;
         String nombre, apellidos, fechaNacimiento;
@@ -293,6 +315,21 @@ public class MainMenu {
         }
     }
 
+
+    /**
+     *
+     * Método que se encarga de realizar las llamadas necesarias a la clase de acceso a datos
+     * para insertar un Alumno en la base de datos
+     *
+     */
+    private static void insertarAlumno() {
+        AlumnoEntity alumno = getAlumnoData();
+        DAO dao = new DAO();
+        dao.guardarAlumno(alumno.getNombre(), alumno.getApellidos(), alumno.getFechaNacimiento());
+
+        System.out.println("Se insertó el alumno");
+    }
+
     /**
      * @param sc
      */
@@ -346,6 +383,12 @@ public class MainMenu {
         }
     }
 
+
+    /**
+     *
+     * @param id
+     * @return
+     */
     private static boolean testIfExistsProfesor(int id) {
         DAO dao = new DAO();
         boolean exists = false;
@@ -381,28 +424,21 @@ public class MainMenu {
 
 
 
-    /**
-     * @param sc
-     */
-    private static void insertarAlumno() {
-        AlumnoEntity alumno = getAlumnoData();
-        DAO dao = new DAO();
-        dao.guardarAlumno(alumno.getNombre(), alumno.getApellidos(), alumno.getFechaNacimiento());
 
-        System.out.println("Se insertó el alumno");
-    }
 
 
 
 
 
     /**
-     * @param sc
+     *
+     * Menu que muestra al usuario las opciones de insercion, edicion y eliminacion de Matriculas
+     *
      */
     public static void accionesMatriculas() {
         boolean salir = false;
         while (!salir) {
-            System.out.println(submenumatriculas);
+            System.out.println(SUBMENUMATRICULAS);
             String opcion = sc.next();
             int eleccion = StringToInt(opcion);
             switch (eleccion) {
