@@ -19,6 +19,7 @@ public class ProfesorEntity implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name= "idProfesor")
     //Atributos
     private int id;
 
@@ -110,6 +111,10 @@ public class ProfesorEntity implements Serializable {
     }
     //End Constructores
 
+
+    public int getId() {
+        return id;
+    }
 
     @Override
     public String toString() {

@@ -10,15 +10,20 @@ public class MatriculaEntity implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "Matricula_id")
+    @Column(name = "idMatricula")
     private int id;
 
 
-
+    @ManyToOne
+    @JoinColumn(name = "idAlumno")
+    private AlumnoEntity alumno;
 
     @ManyToOne
     @JoinColumn(name = "idProfesor")
-   private ProfesorEntity profesor;
+    private ProfesorEntity profesor;
+
+
+
 
     public ProfesorEntity getProfesor() {
         return profesor;
@@ -36,9 +41,7 @@ public class MatriculaEntity implements Serializable {
         this.alumno = alumno;
     }
 
-    @ManyToOne
-    @JoinColumn(name = "idAlumno")
-   private AlumnoEntity alumno;
+
 
 
 
@@ -59,7 +62,9 @@ public class MatriculaEntity implements Serializable {
         this.curso = curso;
     }
 
-
+    public int getId() {
+        return id;
+    }
 
     @Column(name = "asignatura")
     private String asignatura;
@@ -97,9 +102,9 @@ public class MatriculaEntity implements Serializable {
                 ========================================
                 id = %d
                 
-                idProfesor = %d
+                Nombre Completo Profesor = %s
                 
-                idAlumno = %d
+                Nombre completo Alumno = %s
                 
                 asignatura = %s
                 
