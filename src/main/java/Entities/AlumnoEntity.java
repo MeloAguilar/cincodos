@@ -10,6 +10,7 @@ public class AlumnoEntity implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "idAlumno")
     private int id;
 
     @OneToMany(cascade = CascadeType.ALL)
